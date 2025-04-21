@@ -49,41 +49,38 @@ class SecondInterface extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: Positioned(
-              top: 400,
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
                   ),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Text(
-                          article.title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontFamily: 'Somar',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        article.body,
+                ),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        article.title,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 26,
                           fontFamily: 'Somar',
-                          fontWeight: FontWeight.w200,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      article.body,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontFamily: 'Somar',
+                        fontWeight: FontWeight.w200,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

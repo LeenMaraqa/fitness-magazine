@@ -102,7 +102,6 @@ class _HomePageState extends State<HomePage> {
                                 height: 210,
                                 width: 300,
                                 margin: EdgeInsets.only(left: 25),
-
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: CachedNetworkImage(
@@ -214,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                     categories.map((category) {
                       final filtered = filteredArticles;
                       return Container(
-                        // margin: EdgeInsets.only(top: 5),
+                        margin: EdgeInsets.only(left: 15),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: ListView.builder(
                           itemCount: filtered.length,
@@ -238,7 +237,6 @@ class _HomePageState extends State<HomePage> {
                                 margin: EdgeInsets.only(bottom: 20),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withValues(alpha: 0.5),
@@ -259,8 +257,8 @@ class _HomePageState extends State<HomePage> {
 
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(15),
-                                              bottomRight: Radius.circular(15),
+                                              topRight: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
                                             ),
                                             child: CachedNetworkImage(
                                               imageUrl: article.image,
@@ -289,8 +287,8 @@ class _HomePageState extends State<HomePage> {
                                         decoration: BoxDecoration(
                                           color: article.color,
                                           borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            bottomLeft: Radius.circular(15),
+                                            topLeft: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10),
                                           ),
                                         ),
                                         child: Column(
