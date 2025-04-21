@@ -44,6 +44,125 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+class ArticleCard extends StatelessWidget {
+  final Article article;
+  final String tagPrefix;
+
+  const ArticleCard({
+    super.key,
+    required this.article,
+    required this.tagPrefix,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (context) =>
+                    SecondInterface(article: article, TagPrefix: 'category'),
+          ),
+        );
+      },
+      child: Container(
+        height: 155,
+        margin: EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withValues(alpha: 0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Hero(
+                tag: 'category-${article.id}',
+                child: Container(
+                  height: double.infinity,
+
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: article.image,
+                      fit: BoxFit.cover,
+                      placeholder:
+                          (context, url) =>
+                              Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+
+                decoration: BoxDecoration(
+                  color: article.color,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      article.title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontFamily: 'Somar',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 7),
+                    Text(
+                      article.body,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontFamily: 'Somar',
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.share, color: Colors.white),
+                        SizedBox(width: 15),
+                        Icon(Icons.favorite_outline, color: Colors.white),
+                        SizedBox(width: 15),
+                        Icon(Icons.visibility_outlined, color: Colors.white),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _HomePageState extends State<HomePage> {
   String selectedCategory = 'تغذية';
   final List<String> categories = ['تغذية', 'صحة', 'جمال', 'لياقة'];
@@ -56,7 +175,6 @@ class _HomePageState extends State<HomePage> {
         filteredList.add(article);
       }
     }
-
     return filteredList;
   }
 
@@ -213,136 +331,14 @@ class _HomePageState extends State<HomePage> {
                     categories.map((category) {
                       final filtered = filteredArticles;
                       return Container(
-                        margin: EdgeInsets.only(left: 15),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: ListView.builder(
                           itemCount: filtered.length,
                           itemBuilder: (context, index) {
                             final article = filtered[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) => SecondInterface(
-                                          article: article,
-                                          TagPrefix: 'category',
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 155,
-                                margin: EdgeInsets.only(bottom: 20),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withValues(alpha: 0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Hero(
-                                        tag: 'category-${article.id}',
-                                        child: Container(
-                                          height: double.infinity,
-
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(10),
-                                              bottomRight: Radius.circular(10),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: article.image,
-                                              fit: BoxFit.cover,
-                                              placeholder:
-                                                  (context, url) => Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Icon(Icons.error),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 15,
-                                          horizontal: 15,
-                                        ),
-
-                                        decoration: BoxDecoration(
-                                          color: article.color,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              article.title,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 19,
-                                                fontFamily: 'Somar',
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            SizedBox(height: 7),
-                                            Text(
-                                              article.body,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 19,
-                                                fontFamily: 'Somar',
-                                              ),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Icon(
-                                                  Icons.share,
-                                                  color: Colors.white,
-                                                ),
-                                                SizedBox(width: 15),
-                                                Icon(
-                                                  Icons.favorite_outline,
-                                                  color: Colors.white,
-                                                ),
-                                                SizedBox(width: 15),
-                                                Icon(
-                                                  Icons.visibility_outlined,
-                                                  color: Colors.white,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            return ArticleCard(
+                              article: article,
+                              tagPrefix: 'category',
                             );
                           },
                         ),

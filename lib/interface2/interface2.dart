@@ -1,3 +1,4 @@
+import 'package:fitness_magazine/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_magazine/model/article.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,6 +12,18 @@ class SecondInterface extends StatelessWidget {
     required this.article,
     required this.TagPrefix,
   });
+
+  List<Article> get relatedArticles {
+    List<Article> relatedList = [];
+
+    for (var a in Article.articles) {
+      if (a.category == article.category && a.id != article.id) {
+        relatedList.add(a);
+      }
+    }
+
+    return relatedList.take(2).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +72,7 @@ class SecondInterface extends StatelessWidget {
                   ),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: Text(
@@ -71,14 +85,37 @@ class SecondInterface extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
-                      article.body,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontFamily: 'Somar',
-                        fontWeight: FontWeight.w200,
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 30),
+                      child: Text(
+                        article.body,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontFamily: 'Somar',
+                          fontWeight: FontWeight.w200,
+                        ),
                       ),
+                    ),
+                    if (relatedArticles.isNotEmpty)
+                      Text(
+                        'مقالات ذات صلة ',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'Somar',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: relatedArticles.length,
+                      itemBuilder: (context, index) {
+                        final article = relatedArticles[index];
+                        return ArticleCard(
+                          article: article,
+                          tagPrefix: 'category',
+                        );
+                      },
                     ),
                   ],
                 ),
