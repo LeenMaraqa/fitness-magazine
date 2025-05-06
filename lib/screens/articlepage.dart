@@ -5,12 +5,12 @@ import 'package:fitness_magazine/model/data.dart';
 
 class SecondInterface extends StatelessWidget {
   final Article article;
-  final String TagPrefix;
+  final String tagPrefix;
 
   const SecondInterface({
     super.key,
     required this.article,
-    required this.TagPrefix,
+    required this.tagPrefix,
   });
 
   List<Article> relatedArticles() {
@@ -37,8 +37,8 @@ class SecondInterface extends StatelessWidget {
             child: Stack(
               children: [
                 Hero(
-                  tag: '$TagPrefix-${article.id}',
-                  child: Container(
+                  tag: '$tagPrefix-${article.id}',
+                  child: SizedBox(
                     width: double.infinity,
                     child: CachedNetworkImage(
                       imageUrl: article.image,
@@ -63,20 +63,28 @@ class SecondInterface extends StatelessWidget {
                     },
                   ),
                 ),
+                Positioned(
+                  top: 270,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
             flex: 2,
             child: SingleChildScrollView(
-              child: Container(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
             //First Main Section
             //Display list of recent articles
             Container(
-              height: 360,
+              height: 335,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 15),
               margin: EdgeInsets.only(top: 15),
@@ -110,92 +110,94 @@ class MainCard extends StatelessWidget {
           MaterialPageRoute(
             builder:
                 (context) =>
-                    SecondInterface(article: article, TagPrefix: 'main'),
+                    SecondInterface(article: article, tagPrefix: 'main'),
           ),
         );
       },
-      child: Container(
-        height: 220,
-        width: 300,
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Hero(
-                    tag: 'main-${article.id}',
-                    child: Container(
-                      height: 220,
-                      width: 300,
-                      margin: EdgeInsets.only(left: 25),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: article.image,
-                          fit: BoxFit.cover,
-                          placeholder:
-                              (context, url) => Center(
-                                child: Image.asset(
-                                  'assets/assets/images/png/placeholder.png',
-                                ),
+      child: SizedBox(
+        height: 200,
+        width: 325,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Hero(
+                  tag: 'main-${article.id}',
+                  child: Container(
+                    height: 200,
+                    width: 325,
+                    margin: EdgeInsets.only(left: 25),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl: article.image,
+                        fit: BoxFit.cover,
+                        placeholder:
+                            (context, url) => Center(
+                              child: Image.asset(
+                                'assets/assets/images/png/placeholder.png',
                               ),
-                          errorWidget:
-                              (context, url, error) => Icon(Icons.error),
-                        ),
+                            ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 10,
-                    left: 35,
-                    child: Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              ColoredBox(
-                color: article.color,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 35),
-                  child: Text(
-                    article.category,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Somar',
-                      fontSize: 21,
-                      fontWeight: FontWeight.w500,
-                    ),
+                ),
+                Positioned(
+                  top: 10,
+                  left: 35,
+                  child: Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.white,
                   ),
                 ),
-              ),
-              Text(
-                article.title,
-                style: TextStyle(
-                  fontFamily: 'Somar',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 17,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 25),
+              ],
+            ),
+            ColoredBox(
+              color: article.color,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 35),
                 child: Text(
-                  article.body,
-                  maxLines: 2,
+                  article.category,
                   style: TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 17.5,
-                    fontFamily: 'somar',
+                    color: Colors.white,
+                    fontFamily: 'Somar',
+                    fontSize: 21,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  article.title,
+                  style: TextStyle(
+                    fontFamily: 'Somar',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 17,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 25),
+                  child: Text(
+                    article.body,
+                    maxLines: 2,
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 17.5,
+                      fontFamily: 'somar',
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -219,7 +221,7 @@ class CategoryCard extends StatelessWidget {
           MaterialPageRoute(
             builder:
                 (context) =>
-                    SecondInterface(article: article, TagPrefix: 'category'),
+                    SecondInterface(article: article, tagPrefix: 'category'),
           ),
         );
       },
@@ -227,7 +229,7 @@ class CategoryCard extends StatelessWidget {
         height: 125,
         margin: EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.transparent,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withValues(alpha: 0.5),
