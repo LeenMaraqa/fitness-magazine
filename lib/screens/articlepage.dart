@@ -64,12 +64,13 @@ class SecondInterface extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 270,
+                  top: 285,
                   left: 0,
                   right: 0,
                   bottom: 0,
                   child: Container(
                     decoration: BoxDecoration(
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
@@ -84,7 +85,7 @@ class SecondInterface extends StatelessWidget {
             flex: 2,
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,25 +112,33 @@ class SecondInterface extends StatelessWidget {
                       ),
                     ),
                     if (relatedArticles().isNotEmpty)
-                      Text(
-                        'مقالات ذات صلة ',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontFamily: 'Somar',
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          Divider(thickness: 1, color: Colors.grey[300]),
+                          SizedBox(height: 25),
+                          Text(
+                            'مقالات ذات صلة ',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: 'Somar',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: relatedArt.length,
+                            itemBuilder: (context, index) {
+                              final article = relatedArt[index];
+                              return CategoryCard(
+                                article: article,
+                                tagPrefix: 'category',
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: relatedArt.length,
-                      itemBuilder: (context, index) {
-                        final article = relatedArt[index];
-                        return CategoryCard(
-                          article: article,
-                          tagPrefix: 'category',
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),
