@@ -4,11 +4,16 @@ import 'package:fitness_magazine/model/data.dart';
 import 'package:fitness_magazine/screens/articlepage.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   final String selectedCategory = 'تغذية';
   static const List<String> categories = ['تغذية', 'صحة', 'جمال', 'لياقة'];
-
+  final Map<String, Color> categoryColors = {
+    'تغذية': Color(0xFfB4cf66),
+    'صحة': Color(0xFF79bde8),
+    'لياقة': Color(0xFFfccd0a),
+    'جمال': Color(0xFFf05e8e),
+  };
   List<Article> filteredArticles(String category) {
     List<Article> filteredList = [];
 
@@ -50,19 +55,55 @@ class HomePage extends StatelessWidget {
             //Tabbar Section
             Container(
               margin: EdgeInsets.only(top: 60, bottom: 25),
+
               child: TabBar(
+                labelStyle: TextStyle(
+                  fontFamily: 'Somar',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                indicator: BoxDecoration(
+                  color: const Color.fromARGB(255, 155, 162, 165),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.black,
                 tabs: [
                   Tab(
-                    child: Text(categories[0], style: TextStyle(fontSize: 18)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 3,
+                      ),
+                      child: Text(categories[0]),
+                    ),
                   ),
                   Tab(
-                    child: Text(categories[1], style: TextStyle(fontSize: 18)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 3,
+                      ),
+                      child: Text(categories[1]),
+                    ),
                   ),
                   Tab(
-                    child: Text(categories[2], style: TextStyle(fontSize: 18)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 3,
+                      ),
+                      child: Text(categories[2]),
+                    ),
                   ),
                   Tab(
-                    child: Text(categories[3], style: TextStyle(fontSize: 18)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 3,
+                      ),
+                      child: Text(categories[3]),
+                    ),
                   ),
                 ],
               ),
@@ -244,7 +285,7 @@ class CategoryCard extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: CachedNetworkImage(
                   imageUrl: article.image,
                   fit: BoxFit.cover,
@@ -260,7 +301,7 @@ class CategoryCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: ColoredBox(
                   color: article.color,
                   child: Padding(
